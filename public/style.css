@@ -1,0 +1,270 @@
+/* ============================================================
+   DESIGN SYSTEM - LAYANAN DIGITAL DESA AMBOKULON
+   ============================================================ */
+
+/* Import Font Modern (Inter) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Palette Warna Instansi */
+  --primary: #1e3a8a;          /* Biru Navy (Resmi) */
+  --primary-dark: #172554;     /* Biru Gelap */
+  --secondary: #10b981;        /* Hijau Emerald (Positif) */
+  --secondary-hover: #059669;  /* Hijau Gelap */
+  --accent: #3b82f6;           /* Biru Terang (Link/Focus) */
+  
+  /* Palette Netral */
+  --bg-body: #f1f5f9;          /* Abu-abu sangat muda */
+  --text-main: #0f172a;        /* Hitam Slate */
+  --text-muted: #64748b;       /* Abu-abu teks */
+  --white: #ffffff;
+  
+  /* Efek */
+  --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --radius-lg: 16px;
+  --radius-md: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-body);
+  margin: 0;
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+/* ============================================================
+   HEADER SECTION
+   ============================================================ */
+header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: var(--white);
+  padding: 60px 20px 120px; /* Padding bawah lebih besar untuk efek overlap */
+  text-align: center;
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.logo-header {
+  width: 85px;
+  height: auto;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+  transition: transform 0.3s ease;
+}
+
+.logo-header:hover {
+  transform: scale(1.05);
+}
+
+.header-text h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.header-text p {
+  margin: 8px 0 0;
+  font-size: 15px;
+  font-weight: 300;
+  opacity: 0.85;
+}
+
+/* Responsif: Logo di samping teks pada layar lebar */
+@media (min-width: 600px) {
+  .header-content {
+    flex-direction: row;
+    text-align: left;
+  }
+  .logo-header {
+    width: 95px;
+  }
+  .header-text h1 {
+    font-size: 28px;
+  }
+}
+
+/* ============================================================
+   CONTAINER & CARD FORM
+   ============================================================ */
+.container {
+  max-width: 550px;
+  margin: -80px auto 50px; /* Overlap ke header biru */
+  padding: 0 20px;
+}
+
+.card {
+  background: var(--white);
+  padding: 40px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.card-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.card-header h2 {
+  margin: 0;
+  color: var(--primary);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.card-header p {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 5px;
+}
+
+/* ============================================================
+   INPUT STYLES
+   ============================================================ */
+.input-group {
+  margin-bottom: 22px;
+}
+
+label {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-main);
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--text-main);
+  transition: all 0.25s ease;
+  background-color: #fcfcfc;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  background-color: var(--white);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* ============================================================
+   BUTTON STYLES
+   ============================================================ */
+button {
+  width: 100%;
+  padding: 15px;
+  background-color: var(--secondary);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+button:hover {
+  background-color: var(--secondary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+button:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ============================================================
+   STATUS & FEEDBACK (SUCCESS/ERROR)
+   ============================================================ */
+#message {
+  margin-top: 25px;
+}
+
+.success-box {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  padding: 24px;
+  border-radius: var(--radius-md);
+  text-align: center;
+  animation: slideUp 0.4s ease-out;
+}
+
+.success-text {
+  color: #166534;
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.success-box button {
+  background-color: var(--primary);
+  margin-top: 10px;
+}
+
+.success-box button:hover {
+  background-color: var(--primary-dark);
+}
+
+.error {
+  color: #991b1b;
+  background: #fef2f2;
+  border: 1px dashed #fecaca;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Animasi */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Footer atau Watermark opsional */
+.footer-note {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 30px;
+  padding-bottom: 20px;
+}

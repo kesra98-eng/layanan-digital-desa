@@ -1,0 +1,23 @@
+{
+  "name": "layanan_digital",
+  "version": "1.0.0",
+  "description": "Aplikasi pengajuan surat desa",
+  "main": "server/app.js",
+  "scripts": {
+    "start": "node server/app.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "mysql2": "^3.20.0",
+    "pdfkit": "^0.18.0",
+    "qrcode": "^1.5.4"
+  }
+}

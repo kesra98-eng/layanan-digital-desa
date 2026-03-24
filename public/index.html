@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layanan Surat Digital - Desa Ambokulon</title>
+  
+  <!-- Google Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <div class="header-content">
+    <!-- Logo Desa -->
+    <img src="assets/logo.png" alt="Logo Desa Ambokulon" class="logo-header">
+    
+    <div class="header-text">
+      <h1>PEMERINTAH DESA AMBOKULON</h1>
+      <p>Sistem Layanan Mandiri Surat Keterangan Digital</p>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <div class="card">
+    <div class="card-header">
+      <h2>Form Pengajuan Surat</h2>
+      <p>Silakan isi data sesuai dengan KTP asli Anda</p>
+    </div>
+
+    <form id="formPengajuan">
+      <div class="input-group">
+        <label for="nama">Nama Lengkap</label>
+        <input type="text" id="nama" placeholder="Contoh: Budi Santoso" required>
+      </div>
+
+      <div class="input-group">
+        <label for="nik">NIK (16 Digit)</label>
+        <input type="text" id="nik" maxlength="16" placeholder="Masukkan 16 digit NIK" required>
+      </div>
+
+      <div class="input-group">
+        <label for="alamat">Alamat Lengkap</label>
+        <textarea id="alamat" rows="3" placeholder="Nama Dusun, RT/RW" required></textarea>
+      </div>
+
+      <div class="input-group">
+        <label for="keperluan">Keperluan</label>
+        <input type="text" id="keperluan" placeholder="Contoh: Persyaratan Beasiswa" required>
+      </div>
+
+      <div class="input-group">
+        <label for="jenis_surat">Jenis Surat</label>
+        <select id="jenis_surat" required>
+          <option value="">-- Pilih Jenis Surat --</option>
+        </select>
+      </div>
+
+      <button type="submit" id="btnSubmit">Kirim Pengajuan</button>
+    </form>
+
+    <div id="message"></div>
+  </div>
+</main>
+
+<script src="script.js"></script>
+
+</body>
+</html>
