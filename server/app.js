@@ -25,6 +25,13 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../public")));
 
+// =========================
+// 🔥 ROUTE UNTUK ADMIN PAGE
+// =========================
+app.get("/admin", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/admin.html"));
+});
+
 // Route Utama
 const pengajuanRoutes = require("./routes/pengajuanRoutes");
 const jenisSuratRoutes = require("./routes/jenisSuratRoutes");
