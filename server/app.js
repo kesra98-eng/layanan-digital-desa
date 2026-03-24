@@ -3,6 +3,21 @@ const cors = require("cors");
 const path = require("path");
 const db = require("./config/db"); // Pastikan path benar
 
+// =========================
+// 🔥 TEST DATABASE CONNECTION
+// =========================
+(async () => {
+  try {
+    const conn = await db.getConnection();
+    console.log("✅ DATABASE CONNECTED!");
+    console.log("📊 Connected to:", process.env.MYSQLDATABASE || "railway");
+    conn.release();
+  } catch (err) {
+    console.error("❌ DATABASE ERROR:", err.message);
+    console.error("🔧 Check Railway environment variables!");
+  }
+})();
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
