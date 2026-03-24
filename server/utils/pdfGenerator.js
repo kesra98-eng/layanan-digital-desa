@@ -9,6 +9,16 @@ function formatTeks(str) {
   return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 }
 
+// 🔥 FUNGSI TANGGAL DENGAN TIMEZONE INDONESIA
+function formatTanggalIndonesia() {
+  return new Date().toLocaleDateString("id-ID", {
+    timeZone: "Asia/Jakarta",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
+
 async function generatePDF(res, data) {
   // 🔥 DETECT BASE URL (LOCALHOST ATAU PRODUCTION)
   const baseUrl = process.env.APP_URL || `http://localhost:${process.env.PORT || 3000}`;
@@ -21,7 +31,7 @@ async function generatePDF(res, data) {
     alamat: data.alamat,                 // ALAMAT SESUAI INPUT MANUAL WARGA (tidak diformat)
     keperluan: data.keperluan, 
     jenis_surat: data.jenis_surat.toUpperCase(),
-    tanggal_ttd: new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })
+    tanggal_ttd: formatTanggalIndonesia() // 🔥 PAKAI TIMEZONE INDONESIA
   };
 
   // Setup PDF dengan encoding yang benar
