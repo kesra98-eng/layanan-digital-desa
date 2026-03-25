@@ -55,7 +55,12 @@ app.use((err, req, res, next) => {
 // =========================
 app.get("/cek-surat/:nomor", async (req, res) => {
   try {
-    const nomorAsli = req.params.nomor.replace(/-/g, '/'); // Balikkan format nomor
+    // 🔥 CONVERT DARI QR (strip) KE FORMAT DATABASE (slash)
+    const nomorAsli = req.params.nomor.replace(/-/g, "/");
+
+    // 🔥 LOGGING UNTUK DEBUGGING
+    console.log("🔍 QR scan:", req.params.nomor);
+    console.log("🔄 Converted:", nomorAsli);
     
     const [rows] = await db.query(
       `SELECT p.*, j.nama AS jenis_surat 
@@ -65,28 +70,36 @@ app.get("/cek-surat/:nomor", async (req, res) => {
       [nomorAsli]
     );
 
-    if (rows.length > 0) {
-      const data = rows[0];
-      // Kirim tampilan HTML Sederhana untuk pengecekan HP
-      res.send(`
-        <div style="font-family:sans-serif; text-align:center; padding: 20px; border: 5px solid green;">
-          <h2 style="color:green;">✅ SURAT TERVERIFIKASI</h2>
-          <hr>
-          <p>Dokumen ini terdaftar dalam sistem Desa Ambokulon</p>
-          <table style="text-align:left; margin:auto;">
-            <tr><td><b>Nomor</b></td><td>: ${data.nomor_surat}</td></tr>
-            <tr><td><b>Nama</b></td><td>: ${data.nama}</td></tr>
-            <tr><td><b>Jenis</b></td><td>: ${data.jenis_surat}</td></tr>
-            <tr><td><b>Tanggal</b></td><td>: ${new Date(data.tanggal).toLocaleDateString('id-ID')}</td></tr>
-          </table>
-          <br>
-          <small>Sistem Informasi Layanan Digital Desa Ambokulon</small>
-        </div>
+    if (rows.length === 0) {
+      console.error("❌ Document not found:", nomorAsli);
+      return res.status(404).send(`
+        <h2 style="color:red;">❌ Surat Tidak Ditemukan</h2>
+        <p>Nomor yang dicari: ${nomorAsli}</p>
+        <p>Nomor dari QR: ${req.params.nomor}</p>
       `);
-    } else {
-      res.status(404).send("<h2 style='color:red;'>❌ DOKUMEN TIDAK VALID / TIDAK DITEMUKAN</h2>");
     }
+
+    const data = rows[0];
+    console.log("✅ Document found:", data.nomor_surat);
+    
+    // Kirim tampilan HTML Sederhana untuk pengecekan HP
+    res.send(`
+      <div style="font-family:sans-serif; text-align:center; padding: 20px; border: 5px solid green;">
+        <h2 style="color:green;">✅ SURAT TERVERIFIKASI</h2>
+        <hr>
+        <p>Dokumen ini terdaftar dalam sistem Desa Ambokulon</p>
+        <table style="text-align:left; margin:auto;">
+          <tr><td><b>Nomor</b></td><td>: ${data.nomor_surat}</td></tr>
+          <tr><td><b>Nama</b></td><td>: ${data.nama}</td></tr>
+          <tr><td><b>Jenis</b></td><td>: ${data.jenis_surat}</td></tr>
+          <tr><td><b>Tanggal</b></td><td>: ${new Date(data.tanggal).toLocaleDateString('id-ID', { timeZone: 'Asia/Jakarta' })}</td></tr>
+        </table>
+        <br>
+        <small>Sistem Informasi Layanan Digital Desa Ambokulon</small>
+      </div>
+    `);
   } catch (err) {
+    console.error("❌ QR validation error:", err.message);
     res.status(500).send("Error validating document");
   }
 });
