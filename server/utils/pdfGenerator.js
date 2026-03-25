@@ -21,7 +21,8 @@ function formatTanggalIndonesia() {
 
 async function generatePDF(res, data) {
   // 🔥 DETECT BASE URL (LOCALHOST ATAU PRODUCTION)
-  const baseUrl = process.env.APP_URL || `http://localhost:${process.env.PORT || 3000}`;
+  // ✅ UPDATE: Hardcode domain Railway production
+  const baseUrl = "https://layanan-digital-desa-production.up.railway.app";
 
   // 1. SIAPKAN DATA YANG SUDAH RAPI
   const dataRapi = {
