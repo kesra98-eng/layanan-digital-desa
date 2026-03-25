@@ -283,7 +283,8 @@
 </div>
 
 <script>
-  const API_URL = "http://localhost:3000";
+  // 🔥 AUTO-DETECT BASE URL (LOCALHOST ATAU PRODUCTION)
+  const API_URL = window.location.origin;
 
   // 🔐 Simple Password Protection
   const pass = prompt("🔐 Masukkan Password Admin:");
